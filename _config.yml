@@ -30,10 +30,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: "선지희의 블로그"
-subtitle: "난 너무 멋져, 내가 나한테 반하겠어"
+title: "Develover's Blog"
+subtitle: "What I believe becomes real"
 description: >- # this means to ignore newlines until "baseurl:"
-  "내가 하고싶은 대로 살거야"
+  "What I believe becomes real"
 author: "선지희"
 email: "starlover27@naver.com"
 avatar: assets/images/avatar.jpg
