@@ -6,6 +6,7 @@ layout: post
 
 ## Django — Celery  — Redis
 
+
 ### Intro
 
 Django에서는 클라이언트의 요청을 view의 함수를 호출해 return문으로 응답한다. 통상적으로는 사용자에게 응답을 한 뒤 함수의 수명주기가 끝남에 따라 특정 작업을 수행할 수가 없다. 현재 진행 중이었던 프로젝트의 경우 클라이언트에게 노래의 제목을 받으면, 노래 파일과 메타 정보를 제공하면 된다. 그러나 이후 실행될 흐름 상, 노래에 대한 전처리를 하고, clustering을 위해 모델을 돌리는 등 각종 무거운 작업이 수반되어야 한다. 이 모든 작업을 하고 클라이언트에게 응답을 한다면, 족히 십분은 넘게 걸릴 것으로 상상도 할 수 없는 일이다.
@@ -55,14 +56,11 @@ apply_async는 다양한 파라미터를 지원하는데, 위의 옵션 외에�
 
 2. task_id : celery를 통해 비동기로 수행하고자 하는 task의 id
 태스크의 결과값을 백엔드에 저장할 경우 key로 적용한다. 별도로 지정하지 않을 경우 아래와 같이 내부에서 생성된 임의의 id로 저장된다. 내 경우 태스크를 수행하는 컨테이너와 이 결과값을 이용해 전처리를 해야하는 컨테이너가 서로 다를 수 있기 때문에, 임의의 값이 아닌 사용자의 토큰 값을 키로 식별해 서로 다른 컨테이너 간 통신을 지원해야 했다. 이와 같이 백엔드에 기록할 때의 key 값을 지정하고 싶은 경우 task_id 옵션을 사용할 수 있다.
-
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/kMQyJqs/2.png" alt="2" border="0"></a>
 
 3. shadow : log 기록 옵션
 다음과 같은 log에서 찍히는 값을 사용자 지정 옵션으로 조정할 수 있도록 한다 task id를 할 경우와 위치가 다른 것을 볼 수 있다.
-
 <a href="https://ibb.co/Jv0vYCv"><img src="https://i.ibb.co/zXjX3NX/3.png" alt="3" border="0"></a>
-
 
 4. expires : 소멸 시간
 현재 시각 기준으로 하루 이따가 result backend에 쓰인 기록이 소멸되기를 원한다면 다음과 같이 사용할 수 있다. expires=datetime.now() + timedelta(days=1)
