@@ -3,6 +3,7 @@ title: Celery를 통한 서버의 비동기 처리
 author: JiheeSeon
 layout: post
 ---
+
 ## Django — Celery  — Redis
 
 ### Intro
